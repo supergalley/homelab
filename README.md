@@ -1,2 +1,199 @@
 # homelab
 Homelab Settings File
+{
+  "homelab": {
+    "lan_subnet": "192.168.1.0/24",
+    "docker_networks": {
+      "traefik": "192.168.2.0/24",
+      "media_net": "192.168.3.0/24"
+    },
+
+    "devices": {
+      "192.168.1.2": {
+        "hostname": "XanderX4Server",
+        "type": "server",
+        "os": "Ubuntu Server 22.04 LTS",
+        "role": ["primary", "docker_host"],
+        "hardware": {
+          "platform": "Radxa X4",
+          "cpu": "Intel N100",
+          "ram": "8GB DDR5"
+        },
+
+        "storage": {
+          "/eMMC": {
+            "purpose": "os + backup"
+          },
+          "/XanderSSD": {
+            "purpose": "high_io",
+            "folders": ["btc"]
+          },
+          "/XanderHIGH": {
+            "purpose": "media_primary",
+            "folders": [
+              "audio",
+              "boxsets2",
+              "immich",
+              "karaoke",
+              "movies",
+              "music",
+              "MusicVids",
+              "mydocuments",
+              "PiStuff",
+              "software",
+              "ToSort"
+            ]
+          },
+          "/XanderLOW": {
+            "purpose": "tv_storage",
+            "folders": ["boxsets", "boxsets2"]
+          }
+        },
+
+        "docker": {
+          "portainer": "portainer2.supergalley.com",
+          "base_path": "/home/supergalley/docker",
+          "stacks": [
+            "btc",
+            "calendar",
+            "grafana",
+            "grafanaDB",
+            "homarr",
+            "home-assistant",
+            "homepage",
+            "immich",
+            "jellyfin",
+            "minecraft-bedrock",
+            "minecraft-java",
+            "mqtt",
+            "net-boot",
+            "pihole_ddns_adblock",
+            "pihole_unbound",
+            "plex_server",
+            "portainer",
+            "prometheus",
+            "review",
+            "samba",
+            "sandy",
+            "sophia",
+            "traefik",
+            "ttn_saver",
+            "uptime_kuma",
+            "wire-pod",
+            "wireguard2",
+            "1_torrentstack",
+            "2_torrentstack",
+            "3_torrentstack",
+            "4_torrentstack",
+            "404_not_found"
+          ]
+        },
+
+        "notes": [
+          "Use SSD for write-heavy workloads (avoid HDD spin-up)",
+          "Intel iGPU available for VAAPI"
+        ]
+      },
+
+      "192.168.1.3": {
+        "hostname": "XanderPiHole",
+        "type": "network",
+        "role": ["dns", "dhcp"],
+        "hardware": "Pi Zero 2W",
+        "services": ["Pi-hole", "Unbound"]
+      },
+
+      "192.168.1.25": {
+        "hostname": "XanderP55Server",
+        "type": "server",
+        "hardware": "Pi 5 8GB",
+        "storage": ["256GB M.2", "Xander8TB backup"],
+        "extras": ["USB 4G modem"]
+      },
+
+      "192.168.1.26": {
+        "hostname": "XanderPi5Server",
+        "type": "network_interface",
+        "notes": "WLAN only, rarely used"
+      },
+
+      "192.168.1.6": {
+        "hostname": "XanderRyzen7",
+        "type": "workstation",
+        "hardware": {
+          "cpu": "Ryzen 7 5800X",
+          "gpu": "RTX 4060",
+          "ram": "32GB",
+          "storage": "1TB NVMe"
+        },
+        "os": ["Windows 11", "Ubuntu"]
+      },
+
+      "192.168.1.5": {
+        "hostname": "RicohPrinter",
+        "type": "printer",
+        "model": "Ricoh SP C240DN"
+      },
+
+      "192.168.1.7": {
+        "hostname": "MacMiniM4-LAN",
+        "type": "desktop",
+        "hardware": "Mac mini M4 16GB 256GB",
+        "network": "ethernet"
+      },
+
+      "192.168.1.8": {
+        "hostname": "MacMiniM4-WLAN",
+        "type": "desktop",
+        "hardware": "Mac mini M4 16GB 256GB",
+        "network": "wifi"
+      },
+
+      "192.168.1.11": {
+        "hostname": "PS5",
+        "type": "console"
+      },
+
+      "192.168.1.18": {
+        "hostname": "Nest",
+        "type": "iot",
+        "role": "thermostat"
+      },
+
+      "192.168.1.27": {
+        "hostname": "XanderPi5AI",
+        "type": "pi_node",
+        "hardware": "Pi 5 16GB + touchscreen"
+      },
+
+      "192.168.1.35": {
+        "hostname": "XanderRadxaX4-16",
+        "type": "server",
+        "hardware": "Radxa X4 16GB"
+      }
+    },
+
+    "wan": {
+      "66.179.137.69": {
+        "hostname": "XanderOnline",
+        "type": "vps",
+        "role": ["public_services"],
+        "docker": {
+          "portainer": "portainer.supergalley.com",
+          "stacks": [
+            "bannedfromheaven",
+            "chirk",
+            "links",
+            "niknak",
+            "portainer",
+            "sandy",
+            "snappymail",
+            "supergalley",
+            "traefik",
+            "xray"
+          ]
+        }
+      }
+    }
+  }
+}
